@@ -8,11 +8,11 @@ checkpoint_dir: checkpoints/exp_tc2_adv
 
 
 # dataset
-train_wavs_path: /mnt/r/PROJECTS/tts-arabic-pytorch/data/arabic-speech-corpus/wav_new
-train_labels: /mnt/r/PROJECTS/tts-arabic-pytorch/data/arabic-speech-corpus/train_phon.txt
+train_wavs_path: ./data/arabic-speech-corpus/wav_new
+train_labels: ./data/arabic-speech-corpus/train_phon.txt
 
-test_wavs_path: /mnt/r/PROJECTS/tts-arabic-pytorch/data/arabic-speech-corpus/testSet/wav_new
-test_labels: /mnt/r/PROJECTS/tts-arabic-pytorch/data/arabic-speech-corpus/testSet/test_phon.txt
+test_wavs_path: ./data/arabic-speech-corpus/testSet/wav_new
+test_labels: ./data/arabic-speech-corpus/testSet/test_phon.txt
 
 
 label_pattern: '"(?P<filename>.*)" "(?P<phonemes>.*)"'
