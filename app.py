@@ -1,47 +1,43 @@
-import os
+from flask import Flask, request, jsonify, send_file
+import tempfile
+import torchaudio
+from utils.arabicTTSwrapper import ArabicTTSWrapper
 
-import uvicorn
-from fastapi import FastAPI
-from fastapi.responses import FileResponse, Response
-from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
+app = Flask(__name__)
+tts_system = ArabicTTSWrapper()
 
-from utils.app_utils import TTSManager
+@app.route("/tts", methods=["POST"])
+def tts():
+    data = request.get_json()
+    text = data.get("text", "")
+    model_key = data.get("model", "model1")
 
-app = FastAPI()
+    if not text:
+        return jsonify({"error": "Missing 'text'"}), 400
 
-use_cuda_if_available = True
-tts_manager = TTSManager('app/static', use_cuda_if_available=use_cuda_if_available)
-
-class TTSRequest(BaseModel):
-    buckw: str
-    rate: float
-    denoise: float
-
-app.mount('/static', StaticFiles(directory='./app/static'), 'static')
-
-
-@app.get('/')
-async def main():
-    return FileResponse('./app/index.html')
+    try:
+        wav, phonemes = tts_system.synthesize(text, model_key=model_key)
+        tmp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".wav")
+        torchaudio.save(tmp_file.name, wav.unsqueeze(0), 22050)
+        return send_file(tmp_file.name, mimetype="audio/wav")
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
-@app.get('/{filename}')
-async def get_file(filename: str):
-    filepath = f'./app/{filename}'
-    if os.path.exists(filepath):
-        return FileResponse(filepath)
-    return Response(status_code=404)
+@app.route("/phonemes", methods=["POST"])
+def phonemes():
+    data = request.get_json()
+    text = data.get("text", "")
+    model_key = data.get("model", "model1")
 
+    if not text:
+        return jsonify({"error": "Missing 'text'"}), 400
 
-@app.post('/api/tts')
-async def tts(req: TTSRequest):
-    print(req)
-    response_data = tts_manager.tts(req.buckw, req.rate, 
-                                    req.denoise)
+    try:
+        _, phonemes = tts_system.synthesize(text, model_key=model_key)
+        return jsonify({"phonemes": phonemes})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    return response_data
-
-
-if __name__ == '__main__':
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+if __name__ == "__main__":
+    app.run(debug=True, port=5000)

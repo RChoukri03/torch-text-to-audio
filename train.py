@@ -99,8 +99,8 @@ def training_loop(model,
             # LOGGING
             print(f"loss: {loss.item()}, grad_norm: {grad_norm.item()}")
 
-            # writer.add_training_data(loss.item(), grad_norm.item(),
-            #                          config.learning_rate, n_iter)
+            writer.add_training_data(loss.item(), grad_norm.item(),
+                                     config.learning_rate, n_iter)
 
             if n_iter % config.n_save_states_iter == 0:
                 save_states(f'states.pth', model, optimizer,
