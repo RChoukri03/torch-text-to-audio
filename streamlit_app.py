@@ -59,7 +59,7 @@ import torch
 import torchaudio
 import os
 
-from tts_wrapper import ArabicTTSWrapper
+from utils.arabicTTSwrapper import ArabicTTSWrapper
 
 st.set_page_config(page_title="Synthèse Vocale Arabe", layout="centered")
 st.title("🗣️ Synthèse Vocale Arabe")

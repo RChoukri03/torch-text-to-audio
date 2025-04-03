@@ -2,3 +2,6 @@ torch
 torchaudio
 pyyaml
 librosa
+streamlit
+numpy
+requests
