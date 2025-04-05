@@ -79,8 +79,8 @@ text = st.text_area("✍️ Texte arabe à synthétiser :", height=100)
 
 # 🔀 Choix du modèle
 model_options = {
-    "Modèle personnalisé (entraîné par vous)": "custom_model",
-    "Modèle pré-entraîné (baseline)": "pretrained_model"
+    "Modèle personnalisé": "custom_model",
+    "Modèle pré-entraîné": "pretrained_model"
 }
 model_label = st.selectbox("🎛️ Choisir le modèle TTS :", list(model_options.keys()))
 model_key = model_options[model_label]

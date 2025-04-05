@@ -44,9 +44,9 @@ def infer(text_file, checkpoint_path, output_dir, batch_size=2, denoise=0.005):
 
 if __name__ == '__main__':
     infer(
-        text_file='data/test_arab.txt',
-        # checkpoint_path='pretrained/exp_tc2_adv/states_5000.pth',
-        checkpoint_path='pretrained/tacotron2_ar_adv.pth',
+        text_file='data/infer_text.txt',
+        checkpoint_path='pretrained/exp_tc2_adv/states_7232.pth',
+        # checkpoint_path='pretrained/tacotron2_ar_adv.pth',
         output_dir='samples/res_tc2_adv1',
         batch_size=2,
         denoise=0.005
