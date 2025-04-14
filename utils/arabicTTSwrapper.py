@@ -47,13 +47,13 @@ from text import arabic_to_buckwalter, buckwalter_to_phonemes, simplify_phonemes
 class ArabicTTSWrapper:
     def __init__(self):
         self.models = {
-            "custom_model": "pretrainedMods/states_7232.pth",
-            "pretrained_model": "pretrainedMods/tacotron2_ar_adv.pth"
+            "custom_model": "pretrained/states_7232.pth",
+            "pretrained_model": "pretrained/tacotron2_ar_adv.pth"
         }
 
-        self.gdrive_file_id = "1i-DJubglLciFJDZ4hOkKSDDSfpA2g2PB"  # 🔁 Remplace par le vrai file ID
-        self.zip_path = "pretrainedMods.zip"
-        self.extract_dir = "pretrainedMods"
+        self.gdrive_file_id = "1IMqtVOE6O_brqgP68CpG4rs1wrgIsCCp"  # 🔁 Remplace par le vrai file ID
+        self.zip_path = "pretrained.zip"
+        self.extract_dir = ""
         self.instances = {}
 
         self.ensure_models_exist()
