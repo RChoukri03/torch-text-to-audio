@@ -46,8 +46,8 @@ from text import arabic_to_buckwalter, buckwalter_to_phonemes, simplify_phonemes
 class ArabicTTSWrapper:
     def __init__(self):
         self.models = {
-            "custom_model": "pretrained/exp_tc2_adv/states_7232.pth",
-            "pretrained_model": "pretrained/tacotron2_ar_adv.pth"
+            "custom_model": "pretrainedMods/exp_tc2_adv/states_7232.pth",
+            "pretrained_model": "pretrainedMods/tacotron2_ar_adv.pth"
         }
 
         self.gdrive_file_id = "1i-DJubglLciFJDZ4hOkKSDDSfpA2g2PB"  # 🔁 Remplace par le vrai file ID
