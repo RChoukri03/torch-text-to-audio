@@ -52,7 +52,7 @@ class ArabicTTSWrapper:
 
         self.gdrive_file_id = "1i-DJubglLciFJDZ4hOkKSDDSfpA2g2PB"  # 🔁 Remplace par le vrai file ID
         self.zip_path = "pretrainedMods.zip"
-        self.extract_dir = "pretrained"
+        self.extract_dir = "pretrainedMods"
         self.instances = {}
 
         self.ensure_models_exist()
