@@ -38,6 +38,7 @@ import torch
 import torchaudio
 import zipfile
 import gdown
+import streamlit as st
 
 from models.tacotron2 import Tacotron2Wave
 from text import arabic_to_buckwalter, buckwalter_to_phonemes, simplify_phonemes
@@ -46,7 +47,7 @@ from text import arabic_to_buckwalter, buckwalter_to_phonemes, simplify_phonemes
 class ArabicTTSWrapper:
     def __init__(self):
         self.models = {
-            "custom_model": "pretrainedMods/exp_tc2_adv/states_7232.pth",
+            "custom_model": "pretrainedMods/states_7232.pth",
             "pretrained_model": "pretrainedMods/tacotron2_ar_adv.pth"
         }
 
@@ -65,13 +66,18 @@ class ArabicTTSWrapper:
 
     def download_and_extract_models(self):
         url = f"https://drive.google.com/uc?id={self.gdrive_file_id}"
-        gdown.download(url, self.zip_path, quiet=False)
 
-        print("📦 Extraction...")
-        with zipfile.ZipFile(self.zip_path, 'r') as zip_ref:
-            zip_ref.extractall(self.extract_dir)
+        with st.spinner("📥 Téléchargement du modèle..."):
+            gdown.download(url, self.zip_path, quiet=False)
+            print("✅ Téléchargement terminé")
+
+        with st.spinner("📦 Extraction du modèle... veuillez patienter..."):
+            with zipfile.ZipFile(self.zip_path, 'r') as zip_ref:
+                zip_ref.extractall(self.extract_dir)
+            print("✅ Extraction terminée")
 
         os.remove(self.zip_path)
+        st.success("✅ Modèle prêt à l’utilisation !")
 
     def get_model(self, model_key):
         if model_key not in self.models:
