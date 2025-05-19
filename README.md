@@ -11,21 +11,7 @@ Ce projet propose une chaîne complète de synthèse vocale pour la langue arabe
 - 💬 Interface utilisateur interactive via **Streamlit**  
 - 🔁 Backend REST pour l'inférence (Flask)  
 - ☁️ Compatible avec **déploiement local ou sur Streamlit Cloud**
-## 📁 Structure du projet
 
-torch-text-to-audio/
-├── train.py # Script d'entraînement
-├── inference.py # Génération audio à partir du texte
-├── app/
-│ ├── streamlit_app.py # Interface utilisateur Streamlit
-│ └── flask_api.py # API REST Flask
-├── models/ # Définition des architectures
-├── datasets/ # Préparation et chargement des données
-├── utils/ # Fonctions utilitaires (audio, texte, etc.)
-├── configs/ # Fichiers de configuration (JSON/YAML)
-├── checkpoints/ # Modèles sauvegardés
-├── requirements.txt # Dépendances Python
-└── README.md
 
 
 ## 🧪 Entraîner un modèle
